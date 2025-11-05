@@ -8,6 +8,8 @@ This project allows users to participate in a technology poll consisting of six 
 
 🔍 Pages Included
 
+Home page: the welcome page of the project that take us in to the poll page
+
 Poll Page: Users can answer six technology questions with visually appealing options. Each selection highlights when clicked.
 
 Results Page: Displays votes in pie charts, showing the number of votes for each option. Includes a “Back to Poll” button for easy navigation.
@@ -16,21 +18,9 @@ Results Page: Displays votes in pie charts, showing the number of votes for each
 
 Modern and interactive UI/UX design
 
-Two pages: Poll and Results
+Three pages:Home, Poll and Results
 
-Six technology-related questions:
-
-Favorite Programming Language
-
-Preferred IDE
-
-Favorite Tech Company
-
-Preferred Mobile OS
-
-Favorite Cloud Platform
-
-Favorite Framework
+Four technology-related questions:
 
 Dynamic pie charts using Chart.js
 
