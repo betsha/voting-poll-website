@@ -1,0 +1,35 @@
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
+
+const supabaseUrl = 'https://llsbtmkwonzqzuimjpcy.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxsc2J0bWt3b256cXp1aW1qcGN5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM0MTk2MjMsImV4cCI6MjA3ODk5NTYyM30.qdxSLEO5Erra9gsb_edgKDAHBjvOZlBsYtoZzsF3p18';
+const supabase = createClient(supabaseUrl, supabaseKey);
+
+const questions = ['q1','q2','q3','q4','q5','q6'];
+const colors = ['#FF6384','#36A2EB','#FFCE56','#4BC0C0','#9966FF','#FF9F40'];
+
+window.addEventListener('DOMContentLoaded', async () => {
+  const container = document.getElementById('chartsContainer');
+
+  for (const q of questions) {
+    const { data, error } = await supabase.from('votes').select('*').eq('question', q);
+    if (error) continue;
+
+    const labels = data.map(item => item.option);
+    const counts = data.map(item => item.count);
+
+    const canvas = document.createElement('canvas');
+    canvas.id = q;
+    container.appendChild(canvas);
+
+    new Chart(canvas, {
+      type: 'pie',
+      data: { labels, datasets: [{ data: counts, backgroundColor: colors }] },
+      options: {
+        plugins: {
+          legend: { position: 'bottom' },
+          tooltip: { callbacks: { label: ctx => ctx.label + ': ' + ctx.raw } }
+        }
+      }
+    });
+  }
+});

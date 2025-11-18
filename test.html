@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Supabase Test</h2>
+<button id="test">Test Supabase</button>
+<p id="result"></p>
+
+<script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+  const supabaseUrl = 'https://llsbtmkwonzqzuimjpcy.supabase.co';
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxsc2J0bWt3b256cXp1aW1qcGN5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM0MTk2MjMsImV4cCI6MjA3ODk5NTYyM30.qdxSLEO5Erra9gsb_edgKDAHBjvOZlBsYtoZzsF3p18';
+
+  const supabase = createClient(supabaseUrl, supabaseKey);
+
+  document.getElementById('test').addEventListener('click', async () => {
+    const { data, error } = await supabase.from('votes').select('*').limit(1);
+
+    if (error) {
+      document.getElementById('result').innerText = "❌ Not Working: " + error.message;
+      return;
+    }
+
+    document.getElementById('result').innerText = "✅ Connected! Supabase is Working.";
+  });
+</script>
+
+</body>
+</html>
